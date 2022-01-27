@@ -1,0 +1,27 @@
+footer.footer
+  .footer__main.footer-main
+    .footer-main__container._container
+      .footer-main__body
+        each obj in footer        
+          .footer-main__column
+            ul.footer-main__list 
+              li.footer-main__title= obj.title
+              each item, i in obj.items  
+                li.footer-main__item 
+                  if obj.images
+                    img.footer-main__item_img(src=obj.images[i], alt='icon')
+                  a.footer-main__item_link(href='#')= item
+
+  .footer__bottom.footer-bottom
+    .footer-bottom__container._container
+      .footer-bottom__body 
+        .footer-bottom__text Made With Love By Figmaland All Right Reserved
+        .footer-bottom__social-block 
+          a.footer-bottom__social-icon(href='facebook.com')
+            img(src='@img/footer/social/facebook.svg', alt='facebook')
+          a.footer-bottom__social-icon(href='instagram.com')
+            img(src='@img/footer/social/instagram.svg', alt='instagram')
+          a.footer-bottom__social-icon(href='twitter.com')
+            img(src='@img/footer/social/twitter.svg', alt='twitter')
+          a.footer-bottom__social-icon(href='youtube.com')
+            img(src='@img/footer/social/youtube.svg', alt='youtube')

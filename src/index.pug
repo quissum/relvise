@@ -1,0 +1,147 @@
+include html/data.pug
+
+//-----MIXINS----------------
+mixin header(clases, title, subtitle)
+  .header__block(class=clases + '__header')
+    h2.header__title= title
+    p.header__subtitle!= subtitle
+
+mixin section(clases)
+  section(class='page__' + clases + ' ' + clases)
+    ._container(class=clases + '__container') 
+      block
+//----DOCUMENT------------------------
+doctype html
+html(lang='en')
+  include html/head.pug
+
+  body 
+  .wrapper 
+    include html/header.pug
+
+    main.page
+      //-------MAINBLOCK-------------
+      section.page__main-block.main-block
+        .main-block__container._container 
+          .main-block__body
+            h1.main-block__title Finance and Consultancy Solution
+            p.main-block__subtitle We know how large objects will act, but things on a small scale.
+
+            .main-block__buttons 
+              a.main-block__btn Get Quote
+              a.main-block__btn.main-block__btn_border Learn More
+        .main-block__image._ibg
+          img(src='@img/mainBlock/background.jpg', alt='background')
+
+      //--------SERVICES---------------
+      +section('services')
+        .services__body
+          //---cycle-----------
+          each obj in services  
+            .services__column
+              .services__item.service-item(class={ 'service-item_green': obj.green })
+                .service-item__image
+                  img(src=obj.image, alt=obj.name)
+                h2.service-item__title= obj.title
+                p.service-item__text= obj.text
+
+      //--------ADVENTAGE---------------
+      +section('adventages')
+        +header('adventages','Designing Better Experience','Problems trying to resolve the conflict between the two major realms <br> of Classical physics: Newtonian mechanics')
+
+        .adventages__body
+          //---cycle-----------
+          each obj in adventages  
+            .adventages__column
+              .adventages__item(class={ 'service-item_green': obj.green })
+                .adventages__image
+                  img(src=obj.image, alt=obj.text)
+                h3.adventages__title= obj.title
+                p.adventages__text= obj.text
+
+      //--------PRACTICE---------------
+      +section('practice')
+        +header('practice','Practice Advice','Problems trying to resolve the conflict between <br>the two major realms of Classical physics: Newtonian mechanics')
+
+        .practice__body
+          each obj in practice            
+            .practice__column
+              article.practice__item
+                .practice__content 
+                  a.practice__title(href='#')
+                    h3= obj.title
+                  p.practice__text= obj.text
+
+                a.practice__image._ibg(href='#')
+                  img(src=obj.image, alt=obj.title)
+
+      //--------WHOWEARE---------------
+      +section('whoweare')
+        +header('whoweare','Who We Are','Problems trying to resolve the conflict between the two major realms<br> of Classical physics: Newtonian mechanics')
+        .whoweare__body
+          .whoweare__video <iframe src="https://www.youtube.com/embed/XKfgdkcIUxw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+          .whoweare__content
+            .whoweare__top
+              h3.whoweare__title Most trusted in our field
+              p.whoweare__text Most calendars are designed for teams. Slate is designed for freelancers who want a simple way to plan their schedule.
+
+            .whoweare__items
+              each obj in whoweare            
+                .whoweare__item.whoweare-item
+                  .whoweare-item__icon
+                    img(src=obj.image, alt='icon')
+                  .whoweare-item__content
+                    h4.whoweare-item__title= obj.title
+                    p.whoweare-item__text= obj.text
+
+      //--------CLIENTS---------------
+      .page__clients.clients
+        .clients__container._container 
+          .clients__body
+            each obj in clients          
+              .clients__item
+                img(src=obj.image, alt='client icon')
+
+      //--------SUBSCRIBE---------------
+      .page__subscribe.subscribe
+        .subscribe__container._container 
+          .subscribe__body
+            h3.subscribe__title Subscribe For Latest Newsletter
+            form.subscribe__form(action='#')
+              input.subscribe__input(
+                required,
+                type='email',
+                placeholder='Your Email'
+              )
+              input.subscribe__submit(type='submit', value='Subscribe')
+
+      //--------GETINTOUCH---------------
+      +section('getintouch')
+        +header('getintouch','Get In Touch','Problems trying to resolve the conflict between<br> the two major realms of Classical physics: Newtonian mechanics')
+        .getintouch__body
+          each obj in getintouch            
+            .getintouch__column(class={ getintouch__column_big: obj.big })
+              .getintouch__item.getintouch-item
+                .getintouch-item__icon
+                  img(src=obj.image, alt='icon')
+
+                .getintouch-item__email-block
+                  each email in obj.emails   
+                    a.getintouch-item__email(href='mailto:' + email)= email
+
+                .getintouch-item__support= obj.text
+                button.getintouch-item__btn Submit Request
+
+      //--------CONTACT---------------
+      .page__contact.contact 
+        ._container.contact__container
+          .contact__body 
+            .contact__content
+              h3.contact__title Consulting Agency For Your Business
+              p.contact__text the quick fox jumps over the lazy dog
+            button.contact__btn Contact Us
+
+    include html/footer.pug
+
+  script(src='js/app.min.js') 
